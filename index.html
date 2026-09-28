@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roshan | Portfolio</title>
+</head>
+<body>
+  <!-- Accessibility: Skip link lets keyboard users jump straight to main content -->
+  <a href="#main-content">Skip to main content</a>
+
+  <!-- Header and Navigation -->
+  <header id="top">
+    <h1>Roshan: Personal Portfolio</h1>
+    <p>A student exploring networking, cloud computing, and web development.</p>
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#skills">Technical Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- About Section -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I am Roshan, a BIT student passionate about networking, cloud computing, and building modern web applications.</p>
+      <figure>
+        <!-- Semantic figure + figcaption binds image with description -->
+        <img src="images/roshan.jpeg" alt="profile" width="300" height="300">
+        <figcaption>Roshan student  from Nepal</figcaption>
+      </figure>
+    </section>
+
+    <!-- Skills Section : Roshan Dhakal-->
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <!-- Description list is ideal for skill + level pairs -->
+      <dl>
+        <dt>Academic Writing</dt><dd>Intermediate</dd>
+        <dt>Operating System Theory</dt><dd>Beginner</dd>
+        <dt>Linux Command-Line Usage</dt><dd>Beginner</dd>                           
+        <dt>Virtualization & VM Setup</dt><dd>Beginner</dd>
+        <dt>Web Debugging (Cookies/Sessions)</dt><dd>Beginner</dd>
+        <dt>Frontend Development (Tailwind, Next.js)</dt><dd>Beginner</dd>
+        <dt>Networking Fundamentals</dt><dd>Beginner</dd>
+        <dt>Cloud Fundamentals (AWS/Azure)</dt><dd>Beginner</dd>
+        <dt>Basic Video Editing (Canva)</dt><dd>Beginner</dd>
+      </dl>
+    </section>
+
+    <!-- Projects Section: Roshan Dhakal -->
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <!-- Each project is an article with a figure: image is clickable, caption holds text link -->
+      <article aria-labelledby="project-one-title">
+        <h3 id="project-one-title">Project One: Memory Game</h3>
+        <p>In this project, I built a simple memory card game using semantic HTML, JavaScript logic, and structured design principles.</p>
+        <figure>
+          <a href="https://github.com/dhakalroshan345-hash/guessgame.git">
+            <img src="images/memory-game.png" alt="Screenshot of Memory Game project." width="400" height="250" loading="lazy">
+          </a>
+          <figcaption><a href="https://github.com/dhakalroshan345-hash/guessgame.git">View Repository</a></figcaption>
+        </figure>
+      </article>
+
+      <article aria-labelledby="project-two-title">
+        <h3 id="project-two-title">Project Two: Queue Repository</h3>
+        <p>This project demonstrates queue data structure operations implemented with clear logic and semantic markup.</p>
+        <figure>
+          <a href="https://github.com/dhakalroshan345-hash/queue.git">
+            <img src="images/queue-project.png" alt="Screenshot of Queue Repository project." width="400" height="250" loading="lazy">
+          </a>
+          <figcaption><a href="https://github.com/dhakalroshan345-hash/queue.git">View Repository</a></figcaption>
+        </figure>
+      </article>
+    </section>
+    <!-- Contact Section: Roshan Dhakal-->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form>
+        <fieldset>
+          <legend>Send a Message</legend>
+          <!-- Labels explicitly tied to inputs for accessibility -->
+          <p>
+            <label for="contact-name">Name</label><br>
+            <input type="text" id="contact-name" name="name" required>
+          </p>
+          <p>
+            <label for="contact-email">Email</label><br>
+            <input type="email" id="contact-email" name="email" autocomplete="email" required>
+          </p>
+          <p>
+            <label for="contact-message">Message</label><br>
+            <textarea id="contact-message" name="message" rows="5" required></textarea>
+          </p>
+          <button type="submit">Submit</button>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+  <!-- Footer : Roshan Dhakal -->
+  <footer>
+    <p>© 2026 Roshan | Built with semantic HTML5</p>
+  </footer>
+</body>
+</html>
