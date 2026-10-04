@@ -1,0 +1,513 @@
+/* loads the Jost font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap");
+
+/* Roshan Dhakal  CSS Variables*/
+:root {
+  --primary: #5b5bd6;        /* main indigo for buttons and borders */
+  --primary-dark: #4343b8;   /* darker indigo for gradients and hover */
+  --accent: #14b8a6;         
+  --dark: #0f1224;           /* navy for dark sections and headings */
+  --darker: #0a0d1c;         /* deepest navy for the footer */
+  --text: #2b2f45;           /* normal body text colour */
+  --muted: #5f6275;          /* softer grey for captions */
+  --light: #f3f4fb;          /* pale background for sections and fields */
+  --white: #ffffff;          /* plain white */
+  --track: #dfe1f0;          /* empty part of the skill bars */
+  --radius: 1rem;            /* standard corner rounding */
+  --shadow: 0 0.6rem 2rem rgba(15, 18, 36, 0.14); /* soft shadow for cards */
+  --font: "Jost", "Segoe UI", Arial, sans-serif;  /* Jost first, backups after */
+  --nav-h: 6rem;             /* menu height, reused in other rules */
+}
+
+/* Roshan Dhakal Reset: clears the default browser spacing */
+*,
+*::before,
+*::after {
+  margin: 0;                 /* removes default outer space */
+  padding: 0;                /* removes default inner space */
+  box-sizing: border-box;    /* padding stays inside the set width */
+}
+ul { list-style: none; }                       /* removes bullets from lists */
+a { text-decoration: none; color: inherit; }   /* no underline, link takes the nearby colour */
+img { max-width: 100%; display: block; }       /* images never overflow their box */
+
+/* 3. Base */
+html {
+  font-size: 62.5%;          
+  scroll-behavior: smooth;   /* menu links glide to their section */
+}
+
+body {
+  font-family: var(--font);        /* Jost for all text */
+  font-size: 1.8rem;               /* base text size, 18px */
+  line-height: 1.7;                /* roomy lines for easy reading */
+  color: var(--text);              /* dark text colour */
+  background-color: var(--white);  /* white page background */
+}
+
+/* selected text uses the main colour */
+::selection {
+  background: var(--primary);   /* highlight colour */
+  color: var(--white);          /* text stays readable on it */
+}
+
+/* flex centring helper used on header and footer */
+.center {
+  display: flex;                /* turns on flexbox */
+  justify-content: center;      /* centres across the row */
+  align-items: center;          /* centres up and down */
+}
+
+/* sits above the screen until a keyboard focuses it */
+.skip-link {
+  position: absolute;           /* taken out of the normal flow */
+  left: 1rem;                   /* small gap from the left edge */
+  top: -10rem;                  /* hidden above the screen */
+  z-index: 1000;                /* stays on top of everything */
+  background: var(--white);     /* white box */
+  color: var(--primary);        /* indigo link text */
+  padding: 1rem 2rem;           /* space inside the box */
+  border-radius: 0.5rem;        /* slightly rounded corners */
+  font-weight: 600;             /* semi-bold text */
+}
+.skip-link:focus { top: 1rem; } /* slides into view when tabbed to */
+
+:focus-visible {
+  outline: 0.3rem solid var(--primary);  /* thick ring for keyboard users */
+  outline-offset: 0.3rem;                /* small gap between item and ring */
+}
+.nav-bar :focus-visible,
+.contact-area :focus-visible,
+.footer-area :focus-visible {
+  outline-color: var(--accent);          /* teal ring is clearer on dark areas */
+}
+
+/* keeps the fixed menu from hiding a heading after a jump */
+section[id] { scroll-margin-top: var(--nav-h); } /* stops the scroll a menu-height early */
+
+.section-heading {
+  font-size: 4rem;              /* large heading size */
+  font-weight: 700;             /* bold */
+  color: var(--dark);           /* navy text */
+  text-transform: uppercase;    /* capital letters */
+  letter-spacing: 0.4rem;       /* wide gaps between letters */
+  text-align: center;           /* centred heading */
+  text-wrap: balance;           /* splits long titles evenly over lines */
+  margin-bottom: 5rem;          /* space before the section content */
+  padding-bottom: 1.2rem;       /* small space under the text */
+}
+/* short gradient line under each heading */
+.section-heading::after {
+  content: "";                  /* empty content so the line can show */
+  display: block;               /* line sits on its own row */
+  width: 8rem;                  /* line length */
+  height: 0.4rem;               /* line thickness */
+  background: linear-gradient(90deg, var(--primary), var(--accent)); /* indigo to teal */
+  border-radius: 1rem;          /* rounded ends */
+  margin: 1.2rem auto 0;        /* gap above, centred sideways */
+}
+
+/* 4. Hero and navigation */
+.hero-area {
+  min-height: 100vh;            /* banner fills the full screen height */
+  width: 100%;                  /* full width */
+  flex-direction: column;       /* title above subtitle */
+  text-align: center;           /* centred text */
+  padding: calc(var(--nav-h) + 2rem) 2rem 4rem; /* top space keeps the fixed menu off the title */
+  /* layers: teal glow, navy overlay, photo, then a plain colour as backup */
+  background:
+    radial-gradient(circle at 80% 20%, rgba(20, 184, 166, 0.35), transparent 40%), /* teal glow top right */
+    linear-gradient(135deg, rgba(15, 18, 36, 0.88), rgba(91, 91, 214, 0.55)),      /* dark tint for readability */
+    url("images/background.jpg") center / cover no-repeat,                          /* photo fills the area */
+    var(--dark);                                                                    /* backup colour */
+}
+.hero-title {
+  /* clamp: small on phones, bigger on wide screens */
+  font-size: clamp(3.2rem, 7vw, 6.4rem);  /* flexible size between a min and a max */
+  font-weight: 700;                       /* bold */
+  line-height: 1.2;                       /* tighter lines for a big title */
+  color: var(--white);                    /* white on the dark photo */
+  text-transform: uppercase;              /* capital letters */
+  letter-spacing: 0.5rem;                 /* wide letter gaps */
+  margin-bottom: 2.5rem;                  /* space before the subtitle */
+  text-shadow: 0.2rem 0.3rem 1rem rgba(0, 0, 0, 0.5); 
+}
+.hero-subtitle {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem); /* flexible size */
+  color: var(--white);                     /* white text */
+  background-color: var(--primary);        /* indigo pill */
+  padding: 0.8rem 3rem;                    /* space inside the pill */
+  border-radius: 5rem;                     /* very round corners */
+  letter-spacing: 0.15rem;                 /* slight letter gap */
+  max-width: 90rem;                        /* stops it getting too wide */
+  box-shadow: var(--shadow);               /* soft shadow */
+}
+
+/* menu bar stays on top while scrolling, built with flexbox */
+.nav-bar {
+  position: fixed;              /* stays in place while scrolling */
+  top: 0;                       /* sticks to the top edge */
+  left: 0;                      /* sticks to the left edge */
+  width: 100%;                  /* full width bar */
+  height: var(--nav-h);         /* menu height from the variable */
+  z-index: 500;                 /* stays above page content */
+  display: flex;                /* flexbox layout */
+  justify-content: center;      /* centres the menu sideways */
+  align-items: center;          /* centres it up and down */
+  background-color: rgba(15, 18, 36, 0.92);  /* almost solid navy */
+  backdrop-filter: blur(0.8rem);             /* blurs content passing underneath */
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.3); /* shadow under the bar */
+  /* Roshan Dhakal    gradient line along the bottom edge */
+  border-bottom: 0.3rem solid transparent;   /* invisible border that holds the line */
+  border-image: linear-gradient(90deg, var(--primary), var(--accent)) 1; /* paints the border with a gradient */
+}
+.nav-bar ul {
+  display: flex;                /* puts the links in a row */
+  flex-wrap: wrap;              /* links drop to a new line if needed */
+  justify-content: center;      /* centred links */
+  align-items: center;          /* aligned in the middle */
+  gap: 1rem 4rem;               /* row gap and column gap */
+}
+.nav-item {
+  position: relative;           /* lets the underline sit against the link */
+  display: inline-block;        /* allows padding to work */
+  padding: 0.5rem 0;            /* space above and below the text */
+  font-size: 1.6rem;            /* menu text size */
+  font-weight: 600;             /* semi-bold */
+  letter-spacing: 0.2rem;       /* letter gaps */
+  text-transform: uppercase;    /* capital letters */
+  color: var(--white);          /* white links */
+  transition: color 0.25s;      /* smooth colour change */
+}
+/* underline grows from nothing to full width on hover */
+.nav-item::after {
+  content: "";                  /* empty piece used as the line */
+  position: absolute;           /* placed against the link */
+  left: 0;                      /* starts at the left edge */
+  bottom: 0;                    /* sits at the bottom */
+  width: 0;                     /* hidden until hover */
+  height: 0.3rem;               /* line thickness */
+  background-color: var(--accent); /* teal line */
+  border-radius: 1rem;          /* rounded ends */
+  transition: width 0.25s;      /* smooth growing */
+}
+.nav-item:hover,
+.nav-item:focus-visible { color: var(--accent); }        /* text turns teal */
+.nav-item:hover::after,
+.nav-item:focus-visible::after { width: 100%; }          /* line grows to full width */
+
+/*  About */
+.info-block {
+  width: 100%;                  /* full width section */
+  padding: 9rem 2rem;           /* space top, bottom and sides */
+  display: flex;                /* flexbox layout */
+  flex-direction: column;       /* stacks heading, text and photo */
+  align-items: center;          /* centres the content */
+  text-align: center;           /* centred text */
+  background-color: var(--white); /* white background */
+}
+.about-text {
+  max-width: 70rem;             /* limits line length so the text reads easily */
+  font-size: 2rem;              /* a little larger than body text */
+  margin-bottom: 4rem;          /* space before the photo */
+}
+.profile-figure {
+  display: flex;                /* flexbox layout */
+  flex-direction: column;       /* photo above caption */
+  align-items: center;          /* centred */
+  gap: 1.5rem;                  /* space between photo and caption */
+}
+.profile-pic {
+  width: 25rem;                 /* photo width */
+  height: 25rem;                /* same height makes a square */
+  object-fit: cover;            /* crops the photo, no stretching */
+  border-radius: 50%;           /* changes the square into a circle */
+  border: 0.6rem solid var(--primary); /* thick indigo frame */
+  padding: 0.5rem;              /* small gap between photo and frame */
+  background-color: var(--white); /* white gap colour */
+  box-shadow: var(--shadow);    /* soft shadow */
+  transition: transform 0.3s;   /* smooth hover movement */
+}
+.profile-pic:hover { transform: scale(1.05) rotate(2deg); } /* grows and tilts a little */
+
+.profile-caption {
+  font-size: 1.6rem;            /* small caption text */
+  color: var(--muted);          /* soft grey */
+  letter-spacing: 0.1rem;       /* slight letter gap */
+}
+
+/*  Skills: soft dotted background */
+#skills {
+  background-color: var(--light);   /* pale background */
+  background-image: radial-gradient(rgba(91, 91, 214, 0.16) 0.1rem, transparent 0.1rem); /* one tiny dot */
+  background-size: 2.4rem 2.4rem;   /* repeats the dot every 2.4rem */
+}
+.skills-wrapper {
+  width: 100%;                  /* full available width */
+  max-width: 70rem;             /* keeps the bars from stretching too far */
+  display: flex;                /* flexbox layout */
+  flex-direction: column;       /* bars stack in a column */
+  gap: 2.4rem;                  /* space between bars */
+  text-align: left;             /* left-aligned labels */
+}
+/* grey track is a strip at the bottom, the coloured fill sits on it */
+.skill-bar {
+  display: flex;                /* flexbox layout */
+  flex-direction: column;       /* label above the fill */
+  gap: 0.8rem;                  /* space between label and bar */
+  background: linear-gradient(var(--track), var(--track)) left bottom / 100% 1.2rem no-repeat; /* grey strip at the bottom */
+  border-radius: 1rem;          /* rounded corners */
+}
+.skill-text {
+  display: flex;                /* name and level on one row */
+  justify-content: space-between; /* name left, level right */
+  align-items: baseline;        /* text lines up along the bottom */
+  gap: 1rem;                    /* minimum space between them */
+  font-size: 1.8rem;            /* skill name size */
+  font-weight: 500;             /* medium weight */
+  color: var(--dark);           /* navy text */
+}
+.skill-text span {
+  font-size: 1.4rem;            /* smaller level text */
+  font-weight: 700;             /* bold */
+  color: var(--primary);        /* indigo level word */
+  text-transform: uppercase;    /* capital letters */
+  letter-spacing: 0.1rem;       /* slight letter gap */
+}
+
+.skill-fill {
+  height: 1.2rem;               /* bar thickness */
+  background: linear-gradient(90deg, var(--primary), var(--accent)); /* indigo to teal */
+  border-radius: 1rem;          /* rounded ends */
+  animation: grow-bar 1s ease-out; /* bars grow once on load */
+}
+@keyframes grow-bar {
+  from { width: 0; }            /* starts empty, ends at its class width */
+}
+/* widths as classes */
+.fill-30 { width: 30%; }        /* 30 percent bar */
+.fill-35 { width: 35%; }        /* 35 percent bar */
+.fill-40 { width: 40%; }        /* 40 percent bar */
+.fill-70 { width: 70%; }        /* 70 percent bar */
+
+/* 7. Projects */
+.projects-area {
+  width: 100%;                  /* full width section */
+  padding: 9rem 2rem;           /* space around the content */
+  background: linear-gradient(180deg, var(--white), var(--light)); /* soft fade from white to grey */
+}
+/* grid: cards sit side by side, then stack when space runs out */
+.projects-grid {
+  max-width: 110rem;            /* stops the grid growing too wide */
+  margin: 0 auto;               /* centres the grid */
+  display: grid;                /* turns on grid layout */
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); /* as many columns as fit, each at least 30rem */
+  gap: 3rem;                    /* space between cards */
+}
+.project-card {
+  display: flex;                /* flexbox layout */
+  flex-direction: column;       /* text on top, image below */
+  background-color: var(--white); /* white card */
+  border-radius: var(--radius); /* rounded corners */
+  overflow: hidden;             /* clips the image to the corners */
+  box-shadow: var(--shadow);    /* soft shadow */
+  border-top: 0.5rem solid var(--primary); /* indigo strip on top */
+  transition: transform 0.3s, box-shadow 0.3s; /* smooth hover change */
+}
+.project-card:hover {
+  transform: translateY(-0.8rem); /* card lifts up */
+  box-shadow: 0 1.4rem 3rem rgba(15, 18, 36, 0.25); /* deeper shadow */
+}
+.project-info { padding: 2.5rem 2.5rem 1rem; } /* space inside the text block */
+.project-name {
+  font-size: 2.4rem;            /* project title size */
+  font-weight: 700;             /* bold */
+  color: var(--dark);           /* navy text */
+  margin-bottom: 1rem;          /* space under the title */
+}
+.project-info p { font-size: 1.7rem; } /* description text size */
+
+/* auto top margin pushes image and button to the card bottom */
+.project-figure {
+  margin-top: auto;             /* pushes this block to the card bottom */
+  padding: 1.5rem 2.5rem 2.5rem; /* space inside the block */
+  display: flex;                /* flexbox layout */
+  flex-direction: column;       /* image above the button */
+  gap: 1.5rem;                  /* space between image and button */
+}
+
+.project-img {
+  width: 100%;                  /* fills the card width */
+  height: 20rem;                /* same height for both images */
+  object-fit: cover;            /* crops to fit without stretching */
+  border-radius: 0.6rem;        /* slightly rounded corners */
+  background-color: var(--track); /* grey while the image loads */
+  transition: opacity 0.3s;     /* smooth fade on hover */
+}
+.project-card:hover .project-img { opacity: 0.85; } /* image dims a little on card hover */
+
+.project-link {
+  display: inline-block;        /* lets padding and border size the button properly */
+  padding: 0.8rem 2.4rem;       /* space inside the button */
+  font-size: 1.6rem;            /* button text size */
+  font-weight: 600;             /* semi-bold */
+  color: var(--primary);        /* indigo text */
+  border: 0.2rem solid var(--primary); /* indigo outline */
+  border-radius: 5rem;          /* pill shape */
+  transition: background-color 0.25s, color 0.25s; /* smooth colour change */
+}
+.project-link:hover,
+.project-link:focus-visible {
+  background-color: var(--primary); /* fills with indigo */
+  color: var(--white);              /* text turns white */
+}
+
+/* 8. Contact */
+.contact-area {
+  width: 100%;                  /* full width section */
+  padding: 9rem 2rem;           /* space around the form */
+  display: flex;                /* flexbox layout */
+  flex-direction: column;       /* heading above the form */
+  align-items: center;          /* centred content */
+  background: linear-gradient(160deg, var(--dark), #1d2252); /* diagonal navy background */
+}
+.contact-title { color: var(--white); } /* white heading on the dark background */
+
+.contact-form {
+  width: 100%;                  /* uses the full width available */
+  max-width: 55rem;             /* but never wider than 55rem */
+}
+
+.contact-fieldset {
+  border: 0.2rem solid var(--primary); /* indigo frame */
+  border-radius: var(--radius); /* rounded corners */
+  padding: 3rem;                /* space inside the frame */
+  display: flex;                /* flexbox layout */
+  flex-direction: column;       /* fields stack in a column */
+  gap: 1.8rem;                  /* space between fields */
+}
+
+.contact-form legend {
+  padding: 0 1.5rem;            /* leaves a gap in the frame line */
+  font-size: 2rem;              /* legend text size */
+  font-weight: 600;             /* semi-bold */
+  color: var(--white);          /* white text */
+  letter-spacing: 0.1rem;       /* slight letter gap */
+}
+
+.contact-form label {
+  font-size: 1.6rem;            /* label text size */
+  color: var(--white);          /* white on the dark background */
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;                  /* fields fill the form width */
+  margin-top: 0.6rem;           /* gap under the label */
+  padding: 1.2rem 1.4rem;       /* space inside the field */
+  font-family: var(--font);     /* fields do not copy the page font by themselves */
+  font-size: 1.6rem;            /* typing text size */
+  color: var(--text);           /* dark text */
+  background-color: var(--light); /* pale field background */
+  border: 0.2rem solid transparent; /* invisible border, so focus does not shift the layout */
+  border-radius: 0.6rem;        /* rounded corners */
+  transition: border-color 0.25s, box-shadow 0.25s; /* smooth focus change */
+}
+/* coloured glow marks the active field */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;                /* removes the default ring, a custom one follows */
+  border-color: var(--accent);  /* teal border */
+  box-shadow: 0 0 0 0.4rem rgba(20, 184, 166, 0.3); /* soft teal glow */
+}
+
+.contact-form textarea {
+  min-height: 12rem;            /* starting height of the message box */
+  resize: vertical; /* up and down only, keeps the form tidy */
+}
+
+.contact-btn {
+  align-self: stretch;          /* button spans the full form width */
+  padding: 1.3rem;              /* space inside the button */
+  font-family: var(--font);     /* buttons need the font set by hand */
+  font-size: 1.7rem;            /* button text size */
+  font-weight: 600;             /* semi-bold */
+  text-transform: uppercase;    /* capital letters */
+  letter-spacing: 0.5rem;       /* wide letter gaps */
+  color: var(--white);          /* white text */
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark)); /* indigo gradient */
+  border: none;                 /* removes the default border */
+  border-radius: 0.6rem;        /* rounded corners */
+  cursor: pointer;              /* hand cursor on hover */
+  transition: filter 0.25s, transform 0.2s; /* smooth hover change */
+}
+.contact-btn:hover { filter: brightness(1.15); transform: translateY(-0.2rem); } /* brighter and slightly raised */
+
+/* 9. Footer */
+.footer-area {
+  width: 100%;                  /* full width */
+  min-height: 25rem;            /* footer never gets too short */
+  padding: 4rem 2rem;           /* space inside */
+  flex-direction: column;       /* icons above the copyright line */
+  gap: 2.5rem;                  /* space between them */
+  background-color: var(--darker); /* deepest navy */
+  text-align: center;           /* centred text */
+  /* gradient line along the top edge */
+  border-top: 0.3rem solid transparent; /* invisible border that holds the line */
+  border-image: linear-gradient(90deg, var(--primary), var(--accent)) 1; /* gradient colour for the border */
+}
+
+.social-links {
+  display: flex;                /* icons in a row */
+  gap: 2rem;                    /* space between icons */
+}
+
+.social-link {
+  width: 5.2rem;                /* button width */
+  height: 5.2rem;               /* same height makes it square */
+  display: flex;                /* flexbox layout */
+  justify-content: center;      /* icon centred sideways */
+  align-items: center;          /* icon centred up and down */
+  background: linear-gradient(135deg, var(--primary), var(--accent)); /* indigo to teal */
+  border-radius: 50%;  /* becomes circle */
+  transition: transform 0.25s, filter 0.25s; /* smooth hover change */
+}
+.social-link:hover { filter: brightness(1.15); transform: translateY(-0.4rem); } /* brighter and lifted */
+.social-link i { font-size: 2.6rem; color: var(--white); } /* icon size and colour */
+
+.footer-copy {
+  font-size: 1.5rem;            /* small copyright text */
+  letter-spacing: 0.15rem;      /* slight letter gap */
+  color: #aab0c8;               /* soft grey that reads well on navy */
+}
+
+/*  Media queries: tablet first, then phone */
+@media (max-width: 1200px) {
+  .section-heading { font-size: 3.6rem; }  /* slightly smaller headings */
+}
+
+@media (max-width: 800px) {
+  :root { --nav-h: 7.5rem; } /* taller bar so wrapped links fit */
+  .nav-bar ul { gap: 0.4rem 2rem; padding: 0 1rem; }  /* tighter links, small side padding */
+  .nav-item { font-size: 1.4rem; letter-spacing: 0.1rem; } /* smaller menu text */
+  .hero-title { letter-spacing: 0.2rem; }  /* less letter gap so the title fits */
+  .info-block, .projects-area, .contact-area { padding: 6rem 2rem; } /* less section spacing */
+  .section-heading { font-size: 3rem; letter-spacing: 0.2rem; }  /* smaller headings */
+  .projects-grid { grid-template-columns: 1fr; }  /* one card per row */
+}
+
+@media (max-width: 480px) {
+  .hero-subtitle { border-radius: 2rem; padding: 0.8rem 2rem; }  /* less round, less padding */
+  .skill-text { font-size: 1.6rem; flex-direction: column; gap: 0; }  /* level moves under the name */
+  .contact-fieldset { padding: 2rem 1.5rem; }  /* tighter form frame */
+  .contact-btn { letter-spacing: 0.2rem; }     /* narrower button text */
+  .profile-pic { width: 20rem; height: 20rem; }  /* smaller photo */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;       /* no hover animations */
+    animation: none !important;        /* no skill bar growth */
+    scroll-behavior: auto !important;  /* no smooth scrolling */
+  }
+}
