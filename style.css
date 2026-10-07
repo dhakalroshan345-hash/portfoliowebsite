@@ -497,6 +497,7 @@ section[id] { scroll-margin-top: var(--nav-h); } /* stops the scroll a menu-heig
 }
 
 @media (max-width: 480px) {
+  :root { --nav-h: auto; } /* taller bar so wrapped links fit */
   .hero-subtitle { border-radius: 2rem; padding: 0.8rem 2rem; }  /* less round, less padding */
   .skill-text { font-size: 1.6rem; flex-direction: column; gap: 0; }  /* level moves under the name */
   .contact-fieldset { padding: 2rem 1.5rem; }  /* tighter form frame */
